@@ -6,71 +6,70 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using YallaGameAPISecure.Models;
-using YallaGameAPISecure.Models.Repositories;
+using YallaGameAPISecure.unitofwork;
 
 namespace YallaGameAPISecure.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GamesController : ControllerBase
+    public class ReviewPlaces2Controller : ControllerBase
     {
-        private readonly IModelRepositery<Game> context;
+        UnitOfWork unit = UnitOfWork.CreateInstance();
 
-        public GamesController(IModelRepositery<Game> context)
+        public ReviewPlaces2Controller()
         {
-            this.context = context;
+
         }
 
-        // GET: api/Games
+        // GET: api/Users2
         [HttpGet]
-        public List<Game> GetGame()
+        public IEnumerable<ReviewPlace> GetReviewPlace()
         {
-            List<Game> games = context.getAll();
-            return games;
+            return unit.ReviewPlaceManager.getAll();
         }
 
-        // GET: api/games/5
+        // GET: api/ReviewPlaces/5
         [HttpGet("{id}")]
-        public IActionResult Getgame([FromRoute] int id)
+        public IActionResult GetReviewPlace([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var game = context.getById(id);
+            var ReviewPlace = unit.ReviewPlaceManager.getById(id);
 
-            if (game == null)
+            if (ReviewPlace == null)
             {
                 return NotFound();
             }
 
-            return Ok(game);
+            return Ok(ReviewPlace);
         }
 
-        // PUT: api/Users/5
+        // PUT: api/ReviewPlaces/5
         [HttpPut("{id}")]
-        public IActionResult PutGame([FromRoute] int id, [FromBody] Game game)
+        public IActionResult PutReviewPlace([FromRoute] int id, [FromBody] ReviewPlace reviewplace)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != game.GameId)
+            if (id != reviewplace.ReviewId)
             {
                 return BadRequest();
             }
 
-            context.Update(game);
 
+            bool test = true;
             try
             {
-                context.Save();
+                test = unit.ReviewPlaceManager.Update(reviewplace);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!context.ItemExists(id))
+                if (test == false)
                 {
                     return NotFound();
                 }
@@ -83,38 +82,37 @@ namespace YallaGameAPISecure.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/reviewplaces
         [HttpPost]
-        public IActionResult PostUser([FromBody] Game game)
+        public IActionResult Postreviewplaces([FromBody] ReviewPlace reviewplace)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            context.Insert(game);
-            context.Save();
-            return CreatedAtAction("GetUser", new { id = game.GameId }, game);
+            ReviewPlace rp = unit.ReviewPlaceManager.Insert(reviewplace);
+            return CreatedAtAction("GetGame", new { id = rp.ReviewId }, rp);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/reviewplaces/5
         [HttpDelete("{id}")]
-        public IActionResult DeleteUser([FromRoute] int id)
+        public IActionResult DeletePlace([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = context.getById(id);
-            if (user == null)
+            var reviewplace = unit.ReviewPlaceManager.getById(id);
+            if (reviewplace == null)
             {
                 return NotFound();
             }
 
-            context.Delete(id);
-            context.Save();
+            unit.ReviewPlaceManager.Delete(reviewplace);
 
-            return Ok(user);
+
+            return Ok(reviewplace);
         }
     }
 }

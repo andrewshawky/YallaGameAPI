@@ -12,51 +12,51 @@ namespace YallaGameAPISecure.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Invitations2Controller : ControllerBase
+    public class ReviewUsers2Controller : ControllerBase
     {
         UnitOfWork unit = UnitOfWork.CreateInstance();
 
-        public Invitations2Controller()
+        public ReviewUsers2Controller()
         {
 
         }
 
-        // GET: api/invitations2
+        // GET: api/Users2
         [HttpGet]
-        public IEnumerable<Invitation> GetInvitation()
+        public IEnumerable<ReviewUser> GetReviewUser()
         {
-            return unit.InvitationManager.getAll();
+            return unit.ReviewUserManager.getAll();
         }
 
-        // GET: api/invitations/5
+        // GET: api/ReviewUsers/5
         [HttpGet("{id}")]
-        public IActionResult GetInvitation([FromRoute] int id)
+        public IActionResult GetReviewUser([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var invitation = unit.InvitationManager.getById(id);
+            var reviewuser = unit.ReviewUserManager.getById(id);
 
-            if (invitation == null)
+            if (reviewuser == null)
             {
                 return NotFound();
             }
 
-            return Ok(invitation);
+            return Ok(reviewuser);
         }
 
-        // PUT: api/invitations/5
+        // PUT: api/reviewusers/5
         [HttpPut("{id}")]
-        public IActionResult PutInvitation([FromRoute] int id, [FromBody] Invitation invitation)
+        public IActionResult PutreViewUser([FromRoute] int id, [FromBody] ReviewUser reviewuser)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != invitation.InvitationId)
+            if (id != reviewuser.ReviewId)
             {
                 return BadRequest();
             }
@@ -65,7 +65,7 @@ namespace YallaGameAPISecure.Controllers
             bool test = true;
             try
             {
-                test = unit.InvitationManager.Update(invitation);
+                test = unit.ReviewUserManager.Update(reviewuser);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -82,38 +82,37 @@ namespace YallaGameAPISecure.Controllers
             return NoContent();
         }
 
-        // POST: api/invitations
+        // POST: api/Users
         [HttpPost]
-        public IActionResult PostPlace([FromBody] Invitation invitation)
+        public IActionResult PostReviewUser([FromBody] ReviewUser reviewuser)
         {
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            Invitation i = unit.InvitationManager.Insert(invitation);
-            return CreatedAtAction("GetInvitation", new { id = i.InvitationId }, i);
+            ReviewUser ru = unit.ReviewUserManager.Insert(reviewuser);
+            return CreatedAtAction("Getreviewuser", new { id = ru.ReviewId }, ru);
         }
 
-        // DELETE: api/invitations/5
+        // DELETE: api/ReviewUsers/5
         [HttpDelete("{id}")]
-        public IActionResult DeleteInvitation([FromRoute] int id)
+        public IActionResult Deletereviewusers([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var invitation = unit.InvitationManager.getById(id);
-            if (invitation == null)
+            var reviewuser = unit.ReviewUserManager.getById(id);
+            if (reviewuser == null)
             {
                 return NotFound();
             }
 
-            unit.InvitationManager.Delete(invitation);
+            unit.ReviewUserManager.Delete(reviewuser);
 
 
-            return Ok(invitation);
+            return Ok(reviewuser);
         }
     }
 }

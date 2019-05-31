@@ -6,71 +6,70 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using YallaGameAPISecure.Models;
-using YallaGameAPISecure.Models.Repositories;
+using YallaGameAPISecure.unitofwork;
 
 namespace YallaGameAPISecure.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class OnlineUsers2Controller : ControllerBase
     {
-        private readonly IModelRepositery<User> context;
+        UnitOfWork unit = UnitOfWork.CreateInstance();
 
-        public UsersController(IModelRepositery<User> context)
+        public OnlineUsers2Controller()
         {
-            this.context = context;
+
         }
 
-        // GET: api/Users
+        // GET: api/OnlineUser
         [HttpGet]
-        public List<User> GetUser()
+        public IEnumerable<OnlineUsers> GetOnlineUser()
         {
-            List<User> users = context.getAll();
-            return users;
+            return unit.OnlineUserManager.getAll();
         }
 
-        // GET: api/Users/5
+        // GET: api/OnlineUsers/5
         [HttpGet("{id}")]
-        public IActionResult GetUser([FromRoute] int id)
+        public IActionResult GetOnlineUser([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user =  context.getById(id);
+            var OnlineUser = unit.OnlineUserManager.getById(id);
 
-            if (user == null)
+            if (OnlineUser == null)
             {
                 return NotFound();
             }
 
-            return Ok(user);
+            return Ok(OnlineUser);
         }
 
-        // PUT: api/Users/5
+        // PUT: api/OnlineUsers/5
         [HttpPut("{id}")]
-        public IActionResult PutUser([FromRoute] int id, [FromBody] User user)
+        public IActionResult PutOnlineUser([FromRoute] int id, [FromBody] OnlineUsers onlineuser)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != user.UserId)
+            if (id != onlineuser.OnlineId)
             {
                 return BadRequest();
             }
 
-            context.Update(user);
 
+            bool test = true;
             try
             {
-                context.Save();
+                test = unit.OnlineUserManager.Update(onlineuser);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!context.ItemExists(id))
+                if (test == false)
                 {
                     return NotFound();
                 }
@@ -83,40 +82,37 @@ namespace YallaGameAPISecure.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/OnlineUsers
         [HttpPost]
-        public IActionResult PostUser([FromBody] User user)
+        public IActionResult PostOnlineUsers([FromBody] OnlineUsers onlineuser)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            context.Insert(user);
-            context.Save();
-            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+            OnlineUsers ou = unit.OnlineUserManager.Insert(onlineuser);
+            return CreatedAtAction("GetOnlineUsers", new { id = ou.OnlineId }, ou);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/OnlineUsers/5
         [HttpDelete("{id}")]
-        public IActionResult DeleteUser([FromRoute] int id)
+        public IActionResult DeleteOnlineUsers([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = context.getById(id);
-            if (user==null)
+            var OnlineUsers = unit.OnlineUserManager.getById(id);
+            if (OnlineUsers == null)
             {
                 return NotFound();
             }
 
-            context.Delete(id);
-            context.Save();
+            unit.OnlineUserManager.Delete(OnlineUsers);
 
-            return Ok(user);
+
+            return Ok(OnlineUsers);
         }
-
-
     }
 }

@@ -59,6 +59,79 @@ namespace YallaGameAPISecure.unitofwork
                 return new InvitationManager(context);
             }
         }
+
+        public ReviewUserManager ReviewUserManager
+        {
+            get
+            {
+                return new ReviewUserManager(context);
+            }
+        }
+
+        public ChatManager ChatManager
+        {
+            get
+            {
+                return new ChatManager(context);
+            }
+        }
+
+        public ReviewPlaceManager ReviewPlaceManager
+        {
+            get
+            {
+                return new ReviewPlaceManager(context);
+            }
+        }
+
+        public OnlineUserManager OnlineUserManager
+        {
+            get
+            {
+                return new OnlineUserManager(context);
+            }
+        }
+
+        public GroupChatManager GroupChatManager
+        {
+            get
+            {
+                return new GroupChatManager(context);
+            }
+        }
+        
+        public GameInPlaceManager GameInPlaceManager
+        {
+            get
+            {
+                return new GameInPlaceManager(context);
+            }
+        }
+
+        public GameByUserManager GameByUserManager
+        {
+            get
+            {
+                return new GameByUserManager(context);
+            }
+        }
+
+        public UserInvitationManager UserInvitationManager
+        {
+            get
+            {
+                return new UserInvitationManager(context);
+            }
+        }
+
+        public ImageOfPlaceManager ImageOfPlaceManager
+        {
+            get
+            {
+                return new ImageOfPlaceManager(context);
+            }
+        }
+
         //public Employeemanager Employeemanager
         //{
         //    get {

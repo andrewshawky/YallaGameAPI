@@ -6,71 +6,70 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using YallaGameAPISecure.Models;
-using YallaGameAPISecure.Models.Repositories;
+using YallaGameAPISecure.unitofwork;
 
 namespace YallaGameAPISecure.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InvitationsController : ControllerBase
+    public class GroupChats2Controller : ControllerBase
     {
-        private readonly IModelRepositery<Invitation> context;
+        UnitOfWork unit = UnitOfWork.CreateInstance();
 
-        public InvitationsController(IModelRepositery<Invitation> context)
+        public GroupChats2Controller()
         {
-            this.context = context;
+
         }
 
-        // GET: api/Users
+        // GET: api/GroupChats
         [HttpGet]
-        public List<Invitation> GetUser()
+        public IEnumerable<GroupChat> GetGame()
         {
-            List<Invitation> invitations = context.getAll();
-            return invitations;
+            return unit.GroupChatManager.getAll();
         }
 
-        // GET: api/Invitations/5
+        // GET: api/GroupChats/5
         [HttpGet("{id}")]
-        public IActionResult GetInvitation([FromRoute] int id)
+        public IActionResult GetGroupChats([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var invitation = context.getById(id);
+            var GroupChats = unit.GroupChatManager.getById(id);
 
-            if (invitation == null)
+            if (GroupChats == null)
             {
                 return NotFound();
             }
 
-            return Ok(invitation);
+            return Ok(GroupChats);
         }
 
         // PUT: api/Users/5
         [HttpPut("{id}")]
-        public IActionResult PutUser([FromRoute] int id, [FromBody] Invitation invitation)
+        public IActionResult PutGroupChats([FromRoute] int id, [FromBody] GroupChat GroupChat)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != invitation.InvitationId)
+            if (id != GroupChat.GroupId)
             {
                 return BadRequest();
             }
 
-            context.Update(invitation);
 
+            bool test = true;
             try
             {
-                context.Save();
+                test = unit.GroupChatManager.Update(GroupChat);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!context.ItemExists(id))
+                if (test == false)
                 {
                     return NotFound();
                 }
@@ -83,38 +82,37 @@ namespace YallaGameAPISecure.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/GroupChats
         [HttpPost]
-        public IActionResult PostUser([FromBody] Invitation invitation)
+        public IActionResult PostGroupChat([FromBody] GroupChat GroupChat)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            context.Insert(invitation);
-            context.Save();
-            return CreatedAtAction("GetUser", new { id = invitation.InvitationId }, invitation);
+            GroupChat gc = unit.GroupChatManager.Insert(GroupChat);
+            return CreatedAtAction("GetGroupChat", new { id = gc.GroupId }, gc);
         }
 
-        // DELETE: api/invitations/5
+        // DELETE: api/GroupChats/5
         [HttpDelete("{id}")]
-        public IActionResult DeleteInvitation([FromRoute] int id)
+        public IActionResult DeleteGroupChat([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var invitation = context.getById(id);
-            if (invitation == null)
+            var GroupChat = unit.GroupChatManager.getById(id);
+            if (GroupChat == null)
             {
                 return NotFound();
             }
 
-            context.Delete(id);
-            context.Save();
+            unit.GroupChatManager.Delete(GroupChat);
 
-            return Ok(invitation);
+
+            return Ok(GroupChat);
         }
     }
 }

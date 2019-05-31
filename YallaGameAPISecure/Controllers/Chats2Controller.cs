@@ -6,71 +6,70 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using YallaGameAPISecure.Models;
-using YallaGameAPISecure.Models.Repositories;
+using YallaGameAPISecure.unitofwork;
 
 namespace YallaGameAPISecure.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PlacesController : ControllerBase
+    public class Chats2Controller : ControllerBase
     {
-        private readonly IModelRepositery<Place> context;
+        UnitOfWork unit = UnitOfWork.CreateInstance();
 
-        public PlacesController(IModelRepositery<Place> context)
+        public Chats2Controller()
         {
-            this.context = context;
+
         }
 
-        // GET: api/Places
+        // GET: api/Chats2
         [HttpGet]
-        public List<Place> GetPlace()
+        public IEnumerable<Chat> GetChat()
         {
-            List<Place> places = context.getAll();
-            return places;
+            return unit.ChatManager.getAll();
         }
 
-        // GET: api/Places/5
+        // GET: api/Chats/5
         [HttpGet("{id}")]
-        public IActionResult GetPlace([FromRoute] int id)
+        public IActionResult GetChat([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var place = context.getById(id);
+            var chat = unit.ChatManager.getById(id);
 
-            if (place == null)
+            if (chat == null)
             {
                 return NotFound();
             }
 
-            return Ok(place);
+            return Ok(chat);
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Chats/5
         [HttpPut("{id}")]
-        public IActionResult PutUser([FromRoute] int id, [FromBody] Place place)
+        public IActionResult Putchat([FromRoute] int id, [FromBody] Chat chat)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != place.PlaceId)
+            if (id != chat.ChatId)
             {
                 return BadRequest();
             }
 
-            context.Update(place);
 
+            bool test = true;
             try
             {
-                context.Save();
+                test = unit.ChatManager.Update(chat);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!context.ItemExists(id))
+                if (test == false)
                 {
                     return NotFound();
                 }
@@ -83,38 +82,37 @@ namespace YallaGameAPISecure.Controllers
             return NoContent();
         }
 
-        // POST: api/places
+        // POST: api/Chats
         [HttpPost]
-        public IActionResult PostUser([FromBody] Place place)
+        public IActionResult PostChat([FromBody] Chat chat)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            context.Insert(place);
-            context.Save();
-            return CreatedAtAction("GetUser", new { id = place.PlaceId }, place);
+            Chat ch = unit.ChatManager.Insert(chat);
+            return CreatedAtAction("GetChat", new { id = ch.ChatId }, ch);
         }
 
-        // DELETE: api/places/5
+        // DELETE: api/Chats/5
         [HttpDelete("{id}")]
-        public IActionResult DeleteUser([FromRoute] int id)
+        public IActionResult DeleteChat([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var place = context.getById(id);
-            if (place == null)
+            var chat = unit.ChatManager.getById(id);
+            if (chat == null)
             {
                 return NotFound();
             }
 
-            context.Delete(id);
-            context.Save();
+            unit.ChatManager.Delete(chat);
 
-            return Ok(place);
+
+            return Ok(chat);
         }
     }
 }
