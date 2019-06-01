@@ -15,7 +15,6 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using YallaGameAPISecure.Data;
 using YallaGameAPISecure.Models;
-using YallaGameAPISecure.Models.Repositories;
 
 namespace YallaGameAPISecure
 {
@@ -34,10 +33,10 @@ namespace YallaGameAPISecure
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<yallagameContext>(i=>i.UseSqlServer(Configuration.GetConnectionString("yallaContext")));
             services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddScoped<IModelRepositery<User>, UserRepository>();
-            services.AddScoped<IModelRepositery<Game>, GameRepository>();
-            services.AddScoped<IModelRepositery<Place>, PlaceRepository>();
-            services.AddScoped<IModelRepositery<Invitation>, InvitationRepository>();
+            //services.AddScoped<IModelRepositery<User>, UserRepository>();
+            //services.AddScoped<IModelRepositery<Game>, GameRepository>();
+            //services.AddScoped<IModelRepositery<Place>, PlaceRepository>();
+            //services.AddScoped<IModelRepositery<Invitation>, InvitationRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).
                 AddJwtBearer(op => {
                     op.TokenValidationParameters = new TokenValidationParameters
