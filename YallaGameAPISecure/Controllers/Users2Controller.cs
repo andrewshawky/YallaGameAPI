@@ -112,5 +112,24 @@ namespace YallaGameAPISecure.Controllers
 
             return Ok(user);
         }
+
+        // GET: api/Users/cairo
+        [HttpGet("{city:alpha}")]
+        public IActionResult GetUsers([FromRoute] string city)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            List<User> users = unit.UserManager.GetByCity(city);
+
+            if (users == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(users);
+        }
     }
 }

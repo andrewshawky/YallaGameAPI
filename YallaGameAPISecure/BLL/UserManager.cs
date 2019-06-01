@@ -14,5 +14,11 @@ namespace YallaGameAPISecure.BLL
         {
            
         }
+        public List<User> GetByCity(string city)
+        {
+            List<User> users = getAll().Where(i => i.CurrentCity == city).ToList();
+
+            return users;
+        }
     }
 }

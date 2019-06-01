@@ -16,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 using YallaGameAPISecure.Data;
 using YallaGameAPISecure.Models;
+using YallaGameAPISecure.unitofwork;
 
 namespace YallaGameAPISecure
 {
@@ -48,7 +49,9 @@ namespace YallaGameAPISecure
                         ValidateAudience = false
                     };
                 });
-            
+
+            //services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowOrigin",

@@ -27,6 +27,8 @@ namespace YallaGameAPISecure.Models
         public byte[] PasswordHash { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
+        public string CurrentCity { get; set; }
+
         public string Email { get; set; }
         public string Image { get; set; }
         public string EmailKey { get; set; }

@@ -15,6 +15,12 @@ namespace YallaGameAPISecure.BLL
 
         }
 
-        
+        public List<Place> GetByCity(string city)
+        {
+            List<Place> places = getAll().Where(i => i.City == city).ToList();
+
+            return places;
+        }
+
     }
 }
