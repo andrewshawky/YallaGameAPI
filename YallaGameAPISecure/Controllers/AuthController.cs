@@ -60,6 +60,11 @@ namespace YallaGameAPISecure.Controllers
             var usertocreate = new User
             {
                 Name = dtos.UserName,
+                Email=dtos.Email,
+                Country=dtos.Country,
+                City=dtos.City,
+                Phone=dtos.Phone
+
             };
              var createduser = await _repo.Register(usertocreate, dtos.Password);
             return StatusCode(201);

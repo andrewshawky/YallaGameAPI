@@ -224,7 +224,7 @@ namespace YallaGameAPISecure.Models
             {
                 entity.Property(e => e.PlaceId)
                     .HasColumnName("Place_Id")
-                    .ValueGeneratedNever();
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.City)
                     .HasMaxLength(100)
