@@ -16,16 +16,17 @@ using YallaGameAPISecure.Models;
 
 namespace YallaGameAPISecure.Controllers
 {
-    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     [EnableCors("AllowOrigin")]
-    public class AuthController :ControllerBase
+    public class PlaceAuthController : ControllerBase
     {
-        private readonly IAuthRepository<User> _repo;
+
+        private readonly IAuthRepository<Place> _repo;
         private readonly IConfiguration config;
 
-        public AuthController(IAuthRepository<User> repo, IConfiguration config)
+        public PlaceAuthController(IAuthRepository<Place> repo, IConfiguration config)
         {
             _repo = repo;
             this.config = config;
@@ -37,7 +38,7 @@ namespace YallaGameAPISecure.Controllers
         /// <param name="password"></param>
         /// <returns></returns>
         [HttpPost("Register")]
-        public async Task<IActionResult> Register([FromBody]UserForRegisterDtos dtos )
+        public async Task<IActionResult> Register([FromBody]UserForRegisterDtos dtos)
         {
             if (!ModelState.IsValid)
             {
@@ -46,10 +47,10 @@ namespace YallaGameAPISecure.Controllers
             }
             //validate request here
             dtos.UserName = dtos.UserName.ToLower();//make all names in same case
-             //make sure this name isn't taken
-             if(await _repo.UserExists(dtos.UserName))
+                                                    //make sure this name isn't taken
+            if (await _repo.UserExists(dtos.UserName))
             {
-                return BadRequest("user name is already exists");
+                return BadRequest("Place is already exists");
             }
             //make sure this name isn't taken
             if (await _repo.EmailExists(dtos.Email))
@@ -57,11 +58,11 @@ namespace YallaGameAPISecure.Controllers
                 return BadRequest("Email is already exists");
             }
             //create a user 
-            var usertocreate = new User
+            var usertocreate = new Place
             {
                 Name = dtos.UserName,
             };
-             var createduser = await _repo.Register(usertocreate, dtos.Password);
+            var createduser = await _repo.Register(usertocreate, dtos.Password);
             return StatusCode(201);
         }
 
@@ -75,7 +76,7 @@ namespace YallaGameAPISecure.Controllers
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier,userFromRepo.UserId.ToString()),
+                new Claim(ClaimTypes.NameIdentifier,userFromRepo.PlaceId.ToString()),
                 new Claim(ClaimTypes.Name,userFromRepo.Name)
             };
 
@@ -98,6 +99,5 @@ namespace YallaGameAPISecure.Controllers
                 token = tokenHandler.WriteToken(token)
             });
         }
-
     }
 }

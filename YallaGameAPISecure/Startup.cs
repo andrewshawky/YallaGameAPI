@@ -34,7 +34,9 @@ namespace YallaGameAPISecure
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<yallagameContext>(i=>i.UseSqlServer(Configuration.GetConnectionString("yallaContext")));
-            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IAuthRepository<User>, AuthRepository>();
+            services.AddScoped<IAuthRepository<Place>, PlaceRepository>();
+
             //services.AddScoped<IModelRepositery<User>, UserRepository>();
             //services.AddScoped<IModelRepositery<Game>, GameRepository>();
             //services.AddScoped<IModelRepositery<Place>, PlaceRepository>();

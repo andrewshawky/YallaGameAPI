@@ -6,11 +6,11 @@ using YallaGameAPISecure.Models;
 
 namespace YallaGameAPISecure.Data
 {
-    public interface IAuthRepository
+    public interface IAuthRepository<T>
     {
-        Task<User> Register(User username, string password);
+        Task<T> Register(T username, string password);
 
-        Task<User> Login(string username, string password);
+        Task<T> Login(string username, string password);
 
         Task<bool> UserExists(string username);
         Task<bool> EmailExists(string username);

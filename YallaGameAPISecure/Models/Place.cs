@@ -15,7 +15,8 @@ namespace YallaGameAPISecure.Models
         public int PlaceId { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
-        public string Password { get; set; }
+        public byte[] PasswordSalt { get; set; }
+        public byte[] PasswordHash { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
         public string Email { get; set; }
@@ -26,7 +27,6 @@ namespace YallaGameAPISecure.Models
         public string OpenHour { get; set; }
         public string CloseHour { get; set; }
         public int? EmailKey { get; set; }
-        public string ConfirmPassword { get; set; }
 
         public ICollection<GameInPlace> GameInPlace { get; set; }
         public ICollection<ImageOfPlace> ImageOfPlace { get; set; }

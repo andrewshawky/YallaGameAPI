@@ -234,9 +234,7 @@ namespace YallaGameAPISecure.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ConfirmPassword)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
+               
 
                 entity.Property(e => e.Country)
                     .HasMaxLength(100)
@@ -266,9 +264,10 @@ namespace YallaGameAPISecure.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Password)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.Property(e => e.PasswordHash);
+
+                entity.Property(e => e.PasswordSalt);
+                  
 
                 entity.Property(e => e.Phone)
                     .HasMaxLength(20)
