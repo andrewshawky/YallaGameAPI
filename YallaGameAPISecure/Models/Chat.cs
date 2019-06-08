@@ -10,6 +10,7 @@ namespace YallaGameAPISecure.Models
         public int ReceiverId { get; set; }
         public DateTime? Date { get; set; }
         public string Description { get; set; }
+        public bool isdeleted { get; set; }
 
 
         public User Receiver { get; set; }

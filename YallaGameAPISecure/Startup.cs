@@ -54,10 +54,9 @@ namespace YallaGameAPISecure
 
             //services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddCors(options =>
+            services.AddCors(c =>
             {
-                options.AddPolicy("AllowOrigin",
-                    builder => builder.AllowAnyOrigin());
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
             });
             services.AddSwaggerGen(c =>
             {
@@ -86,8 +85,8 @@ namespace YallaGameAPISecure
                 app.UseDeveloperExceptionPage();
             }
             app.UseAuthentication();
-            app.UseCors(builder =>
-             builder.AllowAnyOrigin());
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c => {

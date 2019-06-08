@@ -48,7 +48,7 @@ namespace YallaGameAPISecure.Models
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.Date).HasColumnType("date");
-
+                entity.Property(e => e.isdeleted);
                 entity.Property(e => e.Description)
                     .HasMaxLength(50)
                     .IsUnicode(false);
