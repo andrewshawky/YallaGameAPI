@@ -12,9 +12,20 @@ namespace YallaGameAPISecure.Dtos
     public class UserForRegisterDtos
     {
          [Required]
-        public string username { get; set; }
+        public string UserName { get; set; }
         [Required]
-        [StringLength(8,MinimumLength =4,ErrorMessage ="password length between 4 and 8")]
-        public string password { get; set; }
+        [StringLength(30,MinimumLength =6,ErrorMessage ="password length between 6 and 30")]
+        public string Password { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
+        public string Country { get; set; }
+
+        public string City { get; set; }
+
+        [StringLength(11, MinimumLength = 11, ErrorMessage = "Phone must be 11 digit")]
+        public string Phone { get; set; }
+
     }
 }

@@ -13,6 +13,8 @@ namespace YallaGameAPISecure.Data
         Task<User> Login(string username, string password);
 
         Task<bool> UserExists(string username);
+        Task<bool> EmailExists(string username);
+
 
     }
 }

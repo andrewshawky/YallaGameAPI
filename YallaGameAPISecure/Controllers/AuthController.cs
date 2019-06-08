@@ -45,18 +45,23 @@ namespace YallaGameAPISecure.Controllers
 
             }
             //validate request here
-            dtos.username = dtos.username.ToLower();//make all names in same case
+            dtos.UserName = dtos.UserName.ToLower();//make all names in same case
              //make sure this name isn't taken
-             if(await _repo.UserExists(dtos.username))
+             if(await _repo.UserExists(dtos.UserName))
             {
                 return BadRequest("user name is already exists");
+            }
+            //make sure this name isn't taken
+            if (await _repo.EmailExists(dtos.Email))
+            {
+                return BadRequest("Email is already exists");
             }
             //create a user 
             var usertocreate = new User
             {
-                Name = dtos.username,
+                Name = dtos.UserName,
             };
-             var createduser = await _repo.Register(usertocreate, dtos.password);
+             var createduser = await _repo.Register(usertocreate, dtos.Password);
             return StatusCode(201);
         }
 

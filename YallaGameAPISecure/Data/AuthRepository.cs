@@ -72,5 +72,14 @@ namespace YallaGameAPISecure.Data
             }
             return false;
         }
+
+        public async Task<bool> EmailExists(string email)
+        {
+            if(await _context.User.AnyAsync(x => x.Email == email))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
