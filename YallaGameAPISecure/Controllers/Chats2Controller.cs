@@ -22,11 +22,11 @@ namespace YallaGameAPISecure.Controllers
         }
 
         // GET: api/Chats2
-        [HttpGet]
-        public IEnumerable<Chat> GetChat()
-        {
-            return unit.ChatManager.getAll();
-        }
+        //[HttpGet]
+        //public IEnumerable<Chat> GetChat()
+        //{
+        //    return unit.ChatManager.getAll();
+        //}
 
         // GET: api/Chats/5
         [HttpGet("{id}")]
@@ -37,7 +37,7 @@ namespace YallaGameAPISecure.Controllers
                 return BadRequest(ModelState);
             }
 
-            var chat = unit.ChatManager.getById(id);
+            var chat = unit.ChatManager.GetAllChatOfUser(id);
 
             if (chat == null)
             {
@@ -48,39 +48,39 @@ namespace YallaGameAPISecure.Controllers
         }
 
         // PUT: api/Chats/5
-        [HttpPut("{id}")]
-        public IActionResult Putchat([FromRoute] int id, [FromBody] Chat chat)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //[HttpPut("{id}")]
+        //public IActionResult Putchat([FromRoute] int id, [FromBody] Chat chat)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != chat.ChatId)
-            {
-                return BadRequest();
-            }
+        //    if (id != chat.ChatId)
+        //    {
+        //        return BadRequest();
+        //    }
 
 
-            bool test = true;
-            try
-            {
-                test = unit.ChatManager.Update(chat);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (test == false)
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    bool test = true;
+        //    try
+        //    {
+        //        test = unit.ChatManager.Update(chat);
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (test == false)
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
         // POST: api/Chats
         [HttpPost]
