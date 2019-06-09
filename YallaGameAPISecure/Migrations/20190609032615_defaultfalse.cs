@@ -2,7 +2,7 @@
 
 namespace YallaGameAPISecure.Migrations
 {
-    public partial class isdeleted : Migration
+    public partial class defaultfalse : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

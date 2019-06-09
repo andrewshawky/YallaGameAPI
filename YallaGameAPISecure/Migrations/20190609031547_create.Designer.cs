@@ -10,8 +10,8 @@ using YallaGameAPISecure.Models;
 namespace YallaGameAPISecure.Migrations
 {
     [DbContext(typeof(yallagameContext))]
-    [Migration("20190601114428_currentplace")]
-    partial class currentplace
+    [Migration("20190609031547_create")]
+    partial class create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,8 @@ namespace YallaGameAPISecure.Migrations
                     b.Property<string>("Description")
                         .HasMaxLength(50)
                         .IsUnicode(false);
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<int>("ReceiverId")
                         .HasColumnName("Receiver_Id");
@@ -190,17 +192,15 @@ namespace YallaGameAPISecure.Migrations
             modelBuilder.Entity("YallaGameAPISecure.Models.Place", b =>
                 {
                     b.Property<int>("PlaceId")
-                        .HasColumnName("Place_Id");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Place_Id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("City")
                         .HasMaxLength(100)
                         .IsUnicode(false);
 
                     b.Property<string>("CloseHour")
-                        .HasMaxLength(100)
-                        .IsUnicode(false);
-
-                    b.Property<string>("ConfirmPassword")
                         .HasMaxLength(100)
                         .IsUnicode(false);
 
@@ -234,9 +234,9 @@ namespace YallaGameAPISecure.Migrations
                         .HasMaxLength(100)
                         .IsUnicode(false);
 
-                    b.Property<string>("Password")
-                        .HasMaxLength(50)
-                        .IsUnicode(false);
+                    b.Property<byte[]>("PasswordHash");
+
+                    b.Property<byte[]>("PasswordSalt");
 
                     b.Property<string>("Phone")
                         .HasMaxLength(20)

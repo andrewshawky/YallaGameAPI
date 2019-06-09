@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace YallaGameAPISecure.Migrations
 {
-    public partial class intial : Migration
+    public partial class create : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,10 +27,12 @@ namespace YallaGameAPISecure.Migrations
                 name: "Place",
                 columns: table => new
                 {
-                    Place_Id = table.Column<int>(nullable: false),
+                    Place_Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
                     Phone = table.Column<string>(unicode: false, maxLength: 20, nullable: true),
-                    Password = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
+                    PasswordSalt = table.Column<byte[]>(nullable: true),
+                    PasswordHash = table.Column<byte[]>(nullable: true),
                     Country = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
                     City = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
                     Email = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
@@ -40,8 +42,7 @@ namespace YallaGameAPISecure.Migrations
                     Location = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
                     OpenHour = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
                     CloseHour = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
-                    EmailKey = table.Column<int>(nullable: true),
-                    ConfirmPassword = table.Column<string>(unicode: false, maxLength: 100, nullable: true)
+                    EmailKey = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -56,10 +57,11 @@ namespace YallaGameAPISecure.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
                     Phone = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
-                    PasswordSalt = table.Column<byte[]>(unicode: false, maxLength: 100, nullable: true),
-                    PasswordHash = table.Column<byte[]>(unicode: false, maxLength: 100, nullable: true),
+                    PasswordSalt = table.Column<byte[]>(nullable: true),
+                    PasswordHash = table.Column<byte[]>(nullable: true),
                     Country = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
                     City = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
+                    CurrentCity = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
                     Email = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
                     Image = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
                     EmailKey = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
@@ -143,7 +145,8 @@ namespace YallaGameAPISecure.Migrations
                     Sender_Id = table.Column<int>(nullable: false),
                     Receiver_Id = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(type: "date", nullable: true),
-                    Description = table.Column<string>(unicode: false, maxLength: 50, nullable: true)
+                    Description = table.Column<string>(unicode: false, maxLength: 50, nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

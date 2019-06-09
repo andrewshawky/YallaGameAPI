@@ -17,10 +17,23 @@ namespace YallaGameAPISecure.BLL
 
         public List<Chat> GetAllChatOfUser(int id)
         {
-            var chats = getAll().Where(x => x.SenderId == id || x.ReceiverId == id).ToList();
+            var chats = getAll().Where(x => x.SenderId == id || x.ReceiverId == id)
+                .Where(x => x.IsDeleted == false).ToList();
 
             return chats;
         }
+
+        public List<Chat> GetChatOfUser(int id, int friendId)
+        {
+            var chat = getAll().Where(x => x.SenderId == id || x.ReceiverId == id)
+                .Where(x => x.SenderId == friendId || x.ReceiverId == friendId)
+                .Where(x => x.IsDeleted == false)
+                .ToList();
+
+            return chat;
+        }
+
+        
 
     }
 }

@@ -31,13 +31,13 @@ namespace YallaGameAPISecure.Migrations
                         .HasMaxLength(50)
                         .IsUnicode(false);
 
+                    b.Property<bool>("IsDeleted");
+
                     b.Property<int>("ReceiverId")
                         .HasColumnName("Receiver_Id");
 
                     b.Property<int>("SenderId")
                         .HasColumnName("Sender_Id");
-
-                    b.Property<bool>("isdeleted");
 
                     b.HasKey("ChatId");
 

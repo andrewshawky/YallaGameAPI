@@ -10,8 +10,8 @@ using YallaGameAPISecure.Models;
 namespace YallaGameAPISecure.Migrations
 {
     [DbContext(typeof(yallagameContext))]
-    [Migration("20190608134147_isdeleted-chat")]
-    partial class isdeletedchat
+    [Migration("20190609032615_defaultfalse")]
+    partial class defaultfalse
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,13 +33,13 @@ namespace YallaGameAPISecure.Migrations
                         .HasMaxLength(50)
                         .IsUnicode(false);
 
+                    b.Property<bool>("IsDeleted");
+
                     b.Property<int>("ReceiverId")
                         .HasColumnName("Receiver_Id");
 
                     b.Property<int>("SenderId")
                         .HasColumnName("Sender_Id");
-
-                    b.Property<bool>("isdeleted");
 
                     b.HasKey("ChatId");
 
@@ -192,7 +192,9 @@ namespace YallaGameAPISecure.Migrations
             modelBuilder.Entity("YallaGameAPISecure.Models.Place", b =>
                 {
                     b.Property<int>("PlaceId")
-                        .HasColumnName("Place_Id");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Place_Id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("City")
                         .HasMaxLength(100)

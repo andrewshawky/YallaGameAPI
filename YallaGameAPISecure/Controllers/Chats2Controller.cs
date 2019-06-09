@@ -47,6 +47,66 @@ namespace YallaGameAPISecure.Controllers
             return Ok(chat);
         }
 
+
+        //////////return specific chat from two user
+        ///
+
+        [HttpGet("{FirstUserId}/{SecondUserId}")]
+        public IActionResult SpecificChat([FromRoute] int FirstUserId, [FromRoute] int SecondUserId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var chat = unit.ChatManager.GetChatOfUser(FirstUserId, SecondUserId);
+            if (chat == null)
+            {
+                return NotFound();
+            }
+
+
+            return Ok(chat);
+        }
+
+
+        ///POST: api/Chats2
+        [HttpPost]
+        public IActionResult PostChat([FromBody] Chat chat)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            Chat ch = unit.ChatManager.Insert(chat);
+            return CreatedAtAction("GetChat", new { id = ch.ChatId }, ch);
+        }
+
+        ////////delete
+        [HttpDelete("{UserWantToDeleteId}/{PartnerId}")]
+        public IActionResult DeleteChat([FromRoute] int UserWantToDeleteId, [FromRoute] int PartnerId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var chat = unit.ChatManager.GetChatOfUser(UserWantToDeleteId, PartnerId);
+            if (chat == null)
+            {
+                return NotFound();
+            }
+
+            foreach(var item in chat)
+            {
+                item.IsDeleted = true;
+                unit.ChatManager.Update(item);
+            }
+          
+            
+            return Ok(chat);
+        }
+
         // PUT: api/Chats/5
         //[HttpPut("{id}")]
         //public IActionResult Putchat([FromRoute] int id, [FromBody] Chat chat)
@@ -82,37 +142,9 @@ namespace YallaGameAPISecure.Controllers
         //    return NoContent();
         //}
 
-        // POST: api/Chats
-        [HttpPost]
-        public IActionResult PostChat([FromBody] Chat chat)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            Chat ch = unit.ChatManager.Insert(chat);
-            return CreatedAtAction("GetChat", new { id = ch.ChatId }, ch);
-        }
+        // 
 
-        // DELETE: api/Chats/5
-        [HttpDelete("{id}")]
-        public IActionResult DeleteChat([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        // DELETE: api/Chats/5/1
 
-            var chat = unit.ChatManager.getById(id);
-            if (chat == null)
-            {
-                return NotFound();
-            }
-
-            unit.ChatManager.Delete(chat);
-
-
-            return Ok(chat);
-        }
     }
 }
