@@ -45,7 +45,7 @@ namespace YallaGameAPISecure.Models
             {
                 entity.Property(e => e.ChatId)
                     .HasColumnName("Chat_Id")
-                    .ValueGeneratedNever();
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Date).HasColumnType("date");
                 entity.Property(e => e.IsDeleted);
@@ -74,7 +74,7 @@ namespace YallaGameAPISecure.Models
             {
                 entity.Property(e => e.GameId)
                     .HasColumnName("Game_Id")
-                    .ValueGeneratedNever();
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Description)
                     .HasMaxLength(500)
@@ -147,7 +147,7 @@ namespace YallaGameAPISecure.Models
 
                 entity.Property(e => e.GroupId)
                     .HasColumnName("Group_Id")
-                    .ValueGeneratedNever();
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Date).HasColumnType("date");
 
@@ -183,7 +183,7 @@ namespace YallaGameAPISecure.Models
             {
                 entity.Property(e => e.InvitationId)
                     .HasColumnName("Invitation_Id")
-                    .ValueGeneratedNever();
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.SenderId).HasColumnName("Sender_Id");
 
@@ -202,7 +202,7 @@ namespace YallaGameAPISecure.Models
 
                 entity.Property(e => e.OnlineId)
                     .HasColumnName("Online_Id")
-                    .ValueGeneratedNever();
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Lang)
                     .HasMaxLength(100)
@@ -252,9 +252,10 @@ namespace YallaGameAPISecure.Models
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Location)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
+                entity.Property(e => e.Latitude);
+                entity.Property(e => e.Longitude);
+
+
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(100)

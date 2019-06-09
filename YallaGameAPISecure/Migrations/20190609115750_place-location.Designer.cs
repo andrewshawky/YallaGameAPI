@@ -10,8 +10,8 @@ using YallaGameAPISecure.Models;
 namespace YallaGameAPISecure.Migrations
 {
     [DbContext(typeof(yallagameContext))]
-    [Migration("20190609032615_defaultfalse")]
-    partial class defaultfalse
+    [Migration("20190609115750_place-location")]
+    partial class placelocation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,9 @@ namespace YallaGameAPISecure.Migrations
             modelBuilder.Entity("YallaGameAPISecure.Models.Chat", b =>
                 {
                     b.Property<int>("ChatId")
-                        .HasColumnName("Chat_Id");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Chat_Id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime?>("Date")
                         .HasColumnType("date");
@@ -53,7 +55,9 @@ namespace YallaGameAPISecure.Migrations
             modelBuilder.Entity("YallaGameAPISecure.Models.Game", b =>
                 {
                     b.Property<int>("GameId")
-                        .HasColumnName("Game_Id");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Game_Id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
@@ -117,7 +121,9 @@ namespace YallaGameAPISecure.Migrations
             modelBuilder.Entity("YallaGameAPISecure.Models.GroupChat", b =>
                 {
                     b.Property<int>("GroupId")
-                        .HasColumnName("Group_Id");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Group_Id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime?>("Date")
                         .HasColumnType("date");
@@ -154,7 +160,9 @@ namespace YallaGameAPISecure.Migrations
             modelBuilder.Entity("YallaGameAPISecure.Models.Invitation", b =>
                 {
                     b.Property<int>("InvitationId")
-                        .HasColumnName("Invitation_Id");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Invitation_Id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("SenderId")
                         .HasColumnName("Sender_Id");
@@ -169,7 +177,9 @@ namespace YallaGameAPISecure.Migrations
             modelBuilder.Entity("YallaGameAPISecure.Models.OnlineUsers", b =>
                 {
                     b.Property<int>("OnlineId")
-                        .HasColumnName("Online_Id");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Online_Id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Lang")
                         .HasMaxLength(100)
@@ -222,9 +232,9 @@ namespace YallaGameAPISecure.Migrations
                         .HasMaxLength(500)
                         .IsUnicode(false);
 
-                    b.Property<string>("Location")
-                        .HasMaxLength(100)
-                        .IsUnicode(false);
+                    b.Property<double>("Latitude");
+
+                    b.Property<double>("Longitude");
 
                     b.Property<string>("Name")
                         .HasMaxLength(100)

@@ -23,7 +23,9 @@ namespace YallaGameAPISecure.Models
         public string Rate { get; set; }
         public string Image { get; set; }
         public string Days { get; set; }
-        public string Location { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+
         public string OpenHour { get; set; }
         public string CloseHour { get; set; }
         public int? EmailKey { get; set; }

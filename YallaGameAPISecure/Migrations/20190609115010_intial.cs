@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace YallaGameAPISecure.Migrations
 {
-    public partial class create : Migration
+    public partial class intial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,8 @@ namespace YallaGameAPISecure.Migrations
                 name: "Game",
                 columns: table => new
                 {
-                    Game_Id = table.Column<int>(nullable: false),
+                    Game_Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
                     Description = table.Column<string>(unicode: false, maxLength: 500, nullable: true),
                     Image = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
@@ -141,7 +142,8 @@ namespace YallaGameAPISecure.Migrations
                 name: "Chat",
                 columns: table => new
                 {
-                    Chat_Id = table.Column<int>(nullable: false),
+                    Chat_Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Sender_Id = table.Column<int>(nullable: false),
                     Receiver_Id = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(type: "date", nullable: true),
@@ -195,7 +197,8 @@ namespace YallaGameAPISecure.Migrations
                 name: "Group_Chat",
                 columns: table => new
                 {
-                    Group_Id = table.Column<int>(nullable: false),
+                    Group_Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Sender_Id = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(type: "date", nullable: true)
@@ -215,7 +218,8 @@ namespace YallaGameAPISecure.Migrations
                 name: "Invitation",
                 columns: table => new
                 {
-                    Invitation_Id = table.Column<int>(nullable: false),
+                    Invitation_Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Sender_Id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -237,6 +241,7 @@ namespace YallaGameAPISecure.Migrations
                     Lang = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
                     Lat = table.Column<string>(unicode: false, maxLength: 100, nullable: true),
                     Online_Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
                 },
                 constraints: table =>
                 {
