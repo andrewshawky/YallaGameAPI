@@ -33,7 +33,7 @@ namespace YallaGameAPISecure
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddDbContext<yallagameContext>(i=>i.UseSqlServer(Configuration.GetConnectionString("yallaContext")));
+            services.AddDbContext<yallagameContext>(i => i.UseSqlServer(Configuration.GetConnectionString("yallaContext")));
             services.AddScoped<IAuthRepository<User>, AuthRepository>();
             services.AddScoped<IAuthRepository<Place>, PlaceRepository>();
 
@@ -57,7 +57,16 @@ namespace YallaGameAPISecure
             services.AddCors(c =>
             {
                 c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+
+                c.AddPolicy("AnotherPolicy",
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200")
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
+                });
             });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info
@@ -75,7 +84,7 @@ namespace YallaGameAPISecure
                 });
             });
 
-            }
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
