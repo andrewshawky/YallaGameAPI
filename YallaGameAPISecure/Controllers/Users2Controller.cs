@@ -80,6 +80,39 @@ namespace YallaGameAPISecure.Controllers
             return NoContent();
         }
 
+
+        // PUT: api/Users/5
+        [HttpPut("[action]/{id}/{currentloc}")]
+        public IActionResult Putcurrentlocation([FromRoute] int id, [FromRoute] string currentloc)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+
+
+            currentloc = currentloc.ToLower();
+            bool test = true;
+            try
+            {
+                test = unit.UserManager.UpdateCity(id,currentloc);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (test == false)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
         // POST: api/Users
         [HttpPost]
         public IActionResult PostUser([FromBody] User user)

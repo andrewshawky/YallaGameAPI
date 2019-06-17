@@ -20,5 +20,15 @@ namespace YallaGameAPISecure.BLL
 
             return users;
         }
+
+        public bool UpdateCity(int id,string city)
+        {
+
+           User user = getAll().Where(i => i.UserId == id).FirstOrDefault();
+            user.CurrentCity = city;
+            return Update(user);
+
+            
+        }
     }
 }
