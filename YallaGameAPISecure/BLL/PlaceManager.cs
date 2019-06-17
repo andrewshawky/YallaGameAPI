@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using YallaGameAPISecure.Dtos;
 using YallaGameAPISecure.Models;
 using YallaGameAPISecure.Repository;
 
@@ -14,6 +15,19 @@ namespace YallaGameAPISecure.BLL
         {
 
         }
+
+        public PlaceexDto getPlaceDtoId(int id)
+        {
+            Place pl = getById(id);
+            PlaceexDto x=new PlaceexDto() ;
+            x.PlaceId = pl.PlaceId;
+            x.Rate = pl.Rate;
+            x.OpenHour = pl.OpenHour;
+            x.CloseHour = pl.CloseHour;
+            x.Image = pl.Image;
+            return x ;
+        }
+
 
         public List<Place> GetByCity(string city)
         {

@@ -37,7 +37,7 @@ namespace YallaGameAPISecure.Controllers
                 return BadRequest(ModelState);
             }
 
-            var place = unit.PlaceManager.getById(id);
+            var place = unit.PlaceManager.getPlaceDtoId(id);
 
             if (place == null)
             {
