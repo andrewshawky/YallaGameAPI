@@ -20,5 +20,11 @@ namespace YallaGameAPISecure.BLL
             ImageOfPlace ImageOfPlace = getAll().FirstOrDefault(i => i.ImageOfPlaceId == imageofplaceid && i.PlaceId == placeid);
             return ImageOfPlace;
         }
+
+        public List<ImageOfPlace> findbyplaceid( int placeid)
+        {
+            List<ImageOfPlace> ImageOfPlaces = getAll().Where(i => i.PlaceId == placeid ).ToList();
+            return ImageOfPlaces;
+        }
     }
 }

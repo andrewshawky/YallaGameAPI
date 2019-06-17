@@ -82,7 +82,7 @@ namespace YallaGameAPISecure.Controllers
 
 
         // PUT: api/Users/5
-        [HttpPut("[action]/{id}/{currentloc}")]
+        [HttpPut("[action]/{id}/{currentloc}")]//tosara
         public IActionResult Putcurrentlocation([FromRoute] int id, [FromRoute] string currentloc)
         {
             if (!ModelState.IsValid)

@@ -47,6 +47,25 @@ namespace YallaGameAPISecure.Controllers
             return Ok(GameInPlaces);
         }
 
+
+        // GET: api/GameInPlaces/5/6
+        [HttpGet("[action]/{placeid}")]
+        public IActionResult findByGame([FromRoute] int placeid)//tosara
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var GameInPlaces = unit.GameInPlaceManager.findByPlaceId(placeid);
+
+            if (GameInPlaces == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(GameInPlaces);
+        }
         // PUT: api/GameInPlaces/5/6
         [HttpPut("{placeid}/{gameid}")]
         public IActionResult PutGame([FromRoute] int placeid, [FromRoute] int gameid, [FromBody] GameInPlace GameInPlace)

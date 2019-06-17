@@ -20,7 +20,11 @@ namespace YallaGameAPISecure.BLL
             GameInPlace GameInPlace = getAll().FirstOrDefault(i => i.PlaceId == placeid && i.GameId == gameid);
             return GameInPlace;
         }
-        
+        public List<GameInPlace> findByPlaceId(int placeid)
+        {
+            List<GameInPlace>  GameInPlaces = getAll().Where(i => i.PlaceId == placeid).ToList();
+            return GameInPlaces;
+        }
     }
     
 }
