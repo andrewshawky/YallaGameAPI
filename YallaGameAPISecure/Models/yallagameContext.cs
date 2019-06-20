@@ -292,6 +292,10 @@ namespace YallaGameAPISecure.Models
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Rate)
+                   .HasColumnName("Rate");
+                   
+
                 entity.Property(e => e.PlaceId).HasColumnName("Place_Id");
 
                 entity.Property(e => e.UserId).HasColumnName("User_Id");
@@ -314,6 +318,9 @@ namespace YallaGameAPISecure.Models
                     .HasColumnName("content")
                     .HasMaxLength(500)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Rate)
+                  .HasColumnName("Rate");
 
                 entity.Property(e => e.ReviewerId).HasColumnName("Reviewer_Id");
 

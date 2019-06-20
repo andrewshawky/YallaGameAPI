@@ -9,6 +9,8 @@ namespace YallaGameAPISecure.Models
         public int? UserId { get; set; }
         public int? ReviewerId { get; set; }
         public string Content { get; set; }
+        public int Rate { get; set; }
+
 
         public User Reviewer { get; set; }
         public User User { get; set; }
