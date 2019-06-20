@@ -47,6 +47,26 @@ namespace YallaGameAPISecure.Controllers
             return Ok(ReviewPlace);
         }
 
+
+        // GET: api/ReviewPlaces/5
+        //this usrl take place id and return reviews of this places
+        [HttpGet("[action]/{id}")]
+        public IActionResult GetReviewsByPlace([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var ReviewPlace = unit.ReviewPlaceManager.GetReviewsByPlaceId(id);
+
+            if (ReviewPlace == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(ReviewPlace);
+        }
         // PUT: api/ReviewPlaces/5
         [HttpPut("{id}")]
         public IActionResult PutReviewPlace([FromRoute] int id, [FromBody] ReviewPlace reviewplace)
