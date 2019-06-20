@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,17 +11,20 @@ namespace YallaGameAPISecure.BLL
 {
     public class PlaceManager : ModelRepository2<Place, yallagameContext>
     {
+        DbContext context;
         //here any logic you want to add or overide it 
         public PlaceManager(yallagameContext context) : base(context)
         {
-
+            this.context = context;
         }
 
         public PlaceexDto getPlaceDtoId(int id)
         {
+
             Place pl = getById(id);
             PlaceexDto x=new PlaceexDto() ;
             x.PlaceId = pl.PlaceId;
+            x.Name = pl.Name;
             x.Rate = pl.Rate;
             x.OpenHour = pl.OpenHour;
             x.CloseHour = pl.CloseHour;
@@ -29,9 +33,14 @@ namespace YallaGameAPISecure.BLL
         }
 
 
-        public List<Place> GetByCity(string city)
+        public List<Place> GetByCity(int id)
         {
-            List<Place> places = getAll().Where(i => i.City == city).ToList();
+
+           // yallagameContext context = new yallagameContext();
+
+            string currentCity = context.Set<User>().FirstOrDefault(u => u.UserId == id).CurrentCity;
+            List<Place> places = context.Set<Place>().Where(p => p.City == currentCity).ToList();
+            //List<Place> places = getAll().Where(i => i.City == city).ToList();
 
             return places;
         }

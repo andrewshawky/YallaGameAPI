@@ -164,5 +164,25 @@ namespace YallaGameAPISecure.Controllers
 
             return Ok(users);
         }
+
+
+        // GET: api/OnlineUsers/5
+        [HttpGet("[action]/{id}")]
+        public IActionResult getAllOnlineUsers([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var OnlineUsers = unit.UserManager.getAllOnlineUsers(id);
+
+            if (OnlineUsers == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(OnlineUsers);
+        }
     }
 }

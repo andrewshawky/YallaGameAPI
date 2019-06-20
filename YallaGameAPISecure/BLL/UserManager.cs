@@ -30,5 +30,17 @@ namespace YallaGameAPISecure.BLL
 
             
         }
+
+
+
+        public List<User> getAllOnlineUsers(int id)
+        {
+            List<User> users = getAll().Where(i=>i.Online==true&&i.UserId!=id).ToList();
+            
+            return users;
+        }
+
+
+
     }
 }

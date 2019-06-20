@@ -26,6 +26,7 @@ namespace YallaGameAPISecure.Data
             {
                 return null;
             }
+            User.Online = true;
             return User;
         }
 

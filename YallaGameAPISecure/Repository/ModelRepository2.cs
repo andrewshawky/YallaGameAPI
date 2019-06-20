@@ -13,11 +13,15 @@ namespace YallaGameAPISecure.Repository
     {
         private TContext context;
         private DbSet<T> set;
+        
         public ModelRepository2(TContext context)
         {
             this.context = context;
+            
             set = context.Set<T>();
+
         }
+
 
 
         public bool Delete(T item)
@@ -30,6 +34,8 @@ namespace YallaGameAPISecure.Repository
         {
             return set;
         }
+
+       
 
         public IEnumerable<T> getAllBind()
         {

@@ -10,6 +10,7 @@ namespace YallaGameAPISecure.Repository
         IQueryable<T> getAll();
         IEnumerable<T> getAllBind();
 
+
         T getById(params object[] id);
         T Insert(T item);
         bool Update(T item);
