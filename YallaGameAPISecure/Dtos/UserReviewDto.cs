@@ -10,5 +10,8 @@ namespace YallaGameAPISecure.Dtos
         public int? UserId { get; set; }
         public int? ReviwerId { get; set; }
         public string Content { get; set; }
+        public int Rate { get; set; }
+
+
     }
 }

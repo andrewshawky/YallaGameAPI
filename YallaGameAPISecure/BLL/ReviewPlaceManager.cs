@@ -27,14 +27,17 @@ namespace YallaGameAPISecure.BLL
 
             
             List<PlaceReviewDto> xlist = new List<PlaceReviewDto>();
-            PlaceReviewDto x = new PlaceReviewDto();
+            PlaceReviewDto x ;
 
 
             foreach (ReviewPlace i in res)
             {
+                x = new PlaceReviewDto();
                 x.PlaceId = i.PlaceId;
                 x.UserId = i.UserId;
                 x.Content = i.Content;
+                x.Rate = i.Rate;
+
                 xlist.Add(x);
             }
             
