@@ -93,7 +93,7 @@ namespace YallaGameAPISecure.Controllers
                 return BadRequest(ModelState);
             }
             OnlineUsers ou = unit.OnlineUserManager.Insert(onlineuser);
-            return CreatedAtAction("GetOnlineUsers", new { id = ou.OnlineId }, ou);
+            return Created("GetOnlineUsers",  ou);
         }
 
         // DELETE: api/OnlineUsers/5

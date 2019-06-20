@@ -113,7 +113,7 @@ namespace YallaGameAPISecure.Controllers
             GameInPlace.PlaceId = placeid;
             GameInPlace.GameId = gameid;
             GameInPlace g = unit.GameInPlaceManager.Insert(GameInPlace);
-            return CreatedAtAction("GetGameInPlace", new { placeid ,gameid }, g);
+            return Created("GetGameInPlace", g);
         }
 
         // DELETE: api/GameInPlaces/5/6

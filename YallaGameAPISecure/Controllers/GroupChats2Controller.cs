@@ -91,7 +91,7 @@ namespace YallaGameAPISecure.Controllers
                 return BadRequest(ModelState);
             }
             GroupChat gc = unit.GroupChatManager.Insert(GroupChat);
-            return CreatedAtAction("GetGroupChat", new { id = gc.GroupId }, gc);
+            return Created("GetGroupChat", gc);
         }
 
         // DELETE: api/GroupChats/5

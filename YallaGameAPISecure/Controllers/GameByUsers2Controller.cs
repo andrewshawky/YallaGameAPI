@@ -94,7 +94,7 @@ namespace YallaGameAPISecure.Controllers
             GameByUser.UserId = userid;
             GameByUser.GameId = gameid;
             GameByUser g = unit.GameByUserManager.Insert(GameByUser);
-            return CreatedAtAction("GetGameInPlace", new { userid, gameid }, g);
+            return Created("GetGameInPlace",  g);
         }
 
         // DELETE: api/GameByUsers/5/6

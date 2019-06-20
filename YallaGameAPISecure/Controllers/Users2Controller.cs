@@ -122,7 +122,7 @@ namespace YallaGameAPISecure.Controllers
                 return BadRequest(ModelState);
             }
             User u= unit.UserManager.Insert(user);
-            return CreatedAtAction("GetUser", new { id = u.UserId }, u);
+            return Created("GetUser", u);
         }
 
         // DELETE: api/Users/5

@@ -92,7 +92,7 @@ namespace YallaGameAPISecure.Controllers
                 return BadRequest(ModelState);
             }
             Invitation i = unit.InvitationManager.Insert(invitation);
-            return CreatedAtAction("GetInvitation", new { id = i.InvitationId }, i);
+            return Created("GetInvitation",  i);
         }
 
         // DELETE: api/invitations/5

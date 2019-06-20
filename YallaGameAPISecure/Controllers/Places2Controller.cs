@@ -91,7 +91,7 @@ namespace YallaGameAPISecure.Controllers
                 return BadRequest(ModelState);
             }
             Place p = unit.PlaceManager.Insert(place);
-            return CreatedAtAction("GetUser", new { id = p.PlaceId }, p);
+            return Created("GetUser",  p);
         }
 
         // DELETE: api/Users/5

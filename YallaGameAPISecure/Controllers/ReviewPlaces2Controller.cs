@@ -111,7 +111,7 @@ namespace YallaGameAPISecure.Controllers
                 return BadRequest(ModelState);
             }
             ReviewPlace rp = unit.ReviewPlaceManager.Insert(reviewplace);
-            return CreatedAtAction("GetGame", new { id = rp.ReviewId }, rp);
+            return Created("GetGame",rp);
         }
 
         // DELETE: api/reviewplaces/5

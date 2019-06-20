@@ -91,7 +91,7 @@ namespace YallaGameAPISecure.Controllers
                 return BadRequest(ModelState);
             }
             ReviewUser ru = unit.ReviewUserManager.Insert(reviewuser);
-            return CreatedAtAction("Getreviewuser", new { id = ru.ReviewId }, ru);
+            return Created("Getreviewuser", ru);
         }
 
         // DELETE: api/ReviewUsers/5

@@ -112,7 +112,7 @@ namespace YallaGameAPISecure.Controllers
             ImageOfPlace.PlaceId = placeid;
             ImageOfPlace.ImageOfPlaceId = imageofplaceid;
             ImageOfPlace g = unit.ImageOfPlaceManager.Insert(ImageOfPlace);
-            return CreatedAtAction("GetGameInPlace", new { placeid, imageofplaceid }, g);
+            return Created("GetGameInPlace", g);
         }
 
         // DELETE: api/ImageOfPlaces/5/6

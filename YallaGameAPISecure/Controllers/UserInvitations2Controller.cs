@@ -94,7 +94,7 @@ namespace YallaGameAPISecure.Controllers
             UserInvitation.UserId = userid;
             UserInvitation.InvitationId = invitationid;
             UserInvitation g = unit.UserInvitationManager.Insert(UserInvitation);
-            return CreatedAtAction("GetGameInPlace", new { userid, invitationid }, g);
+            return Created("GetGameInPlace",  g);
         }
 
         // DELETE: api/UserInvitations/5/6

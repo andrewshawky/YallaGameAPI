@@ -79,7 +79,7 @@ namespace YallaGameAPISecure.Controllers
                 return BadRequest(ModelState);
             }
             Chat ch = unit.ChatManager.Insert(chat);
-            return CreatedAtAction("GetChat", new { id = ch.ChatId }, ch);
+            return Created("GetChat",  ch);
         }
 
         ////////delete
