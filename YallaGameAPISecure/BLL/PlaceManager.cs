@@ -29,6 +29,7 @@ namespace YallaGameAPISecure.BLL
             x.OpenHour = pl.OpenHour;
             x.CloseHour = pl.CloseHour;
             x.Image = pl.Image;
+            x.Phone = pl.Phone;
             return x ;
         }
 
