@@ -47,6 +47,28 @@ namespace YallaGameAPISecure.Controllers
             return Ok(place);
         }
 
+
+
+        // GET: api/Users/5
+        //function take place id and return games in this place
+
+        [HttpGet("[action]/{id}")]
+        public IActionResult GetGamesByPlace([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var myplaces = unit.GameManager.GetGamesByPlaceID(id);
+
+            if (myplaces == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(myplaces);
+        }
         // PUT: api/Users/5
         [HttpPut("{id}")]
         public IActionResult PutGame([FromRoute] int id, [FromBody] Game game)
