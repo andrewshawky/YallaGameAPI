@@ -29,6 +29,8 @@ namespace YallaGameAPISecure.Controllers
         }
 
         // GET: api/Users/5
+        //send id of place and return specific data of this place  
+
         [HttpGet("{id}")]
         public IActionResult GetPlace([FromRoute] int id)
         {

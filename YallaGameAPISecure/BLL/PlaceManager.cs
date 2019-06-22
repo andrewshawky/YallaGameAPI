@@ -18,6 +18,8 @@ namespace YallaGameAPISecure.BLL
             this.context = context;
         }
 
+
+        //send id of place and return specific data of this place  
         public PlaceexDto getPlaceDtoId(int id)
         {
 
