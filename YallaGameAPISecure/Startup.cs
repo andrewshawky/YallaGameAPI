@@ -66,6 +66,7 @@ namespace YallaGameAPISecure
                                         .AllowAnyMethod()
                                         .AllowAnyOrigin()
                                         .AllowCredentials();
+
                 });
                 c.AddPolicy("AnotherPolicy1",
                builder =>
