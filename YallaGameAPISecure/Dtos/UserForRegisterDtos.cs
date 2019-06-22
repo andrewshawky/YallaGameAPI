@@ -27,5 +27,8 @@ namespace YallaGameAPISecure.Dtos
         [StringLength(11, MinimumLength = 11, ErrorMessage = "Phone must be 11 digit")]
         public string Phone { get; set; }
 
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+
     }
 }

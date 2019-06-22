@@ -64,7 +64,10 @@ namespace YallaGameAPISecure.Controllers
                 Email = dtos.Email,
                 Country = dtos.Country,
                 City = dtos.City,
-                Phone = dtos.Phone
+                Phone = dtos.Phone,
+                Latitude=dtos.Latitude,
+                Longitude=dtos.Longitude
+                
             };
             var createduser = await _repo.Register(usertocreate, dtos.Password);
             return StatusCode(201);
