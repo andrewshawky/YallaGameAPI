@@ -53,6 +53,7 @@ namespace YallaGameAPISecure.Controllers
         [HttpPut("{id}")]
         public IActionResult PutPlace([FromRoute] int id, [FromBody] Place place)
         {
+            place.PlaceId = id;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -67,7 +68,7 @@ namespace YallaGameAPISecure.Controllers
             bool test = true;
             try
             {
-                test = unit.PlaceManager.Update(place);
+                test = unit.PlaceManager.Updatev1(place);
             }
             catch (DbUpdateConcurrencyException)
             {

@@ -55,5 +55,20 @@ namespace YallaGameAPISecure.BLL
             return places;
         }
 
+        public bool Updatev1(Place item)
+        {
+            Place oldplace = context.Set<Place>().Find(item.PlaceId);
+            oldplace.Name = item.Name;
+            oldplace.Email = item.Email;
+            oldplace.Country = item.Country;
+            oldplace.City = item.City;
+            oldplace.OpenHour = item.OpenHour;
+            oldplace.CloseHour = item.CloseHour;
+            oldplace.Phone = item.Phone;
+            oldplace.Days = item.Days;
+            return context.SaveChanges() > 0 ? true : false;
+
+        }
+
     }
 }
