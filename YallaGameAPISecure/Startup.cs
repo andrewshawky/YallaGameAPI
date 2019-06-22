@@ -63,8 +63,19 @@ namespace YallaGameAPISecure
                 {
                     builder.WithOrigins("http://localhost:4200")
                                         .AllowAnyHeader()
-                                        .AllowAnyMethod();
+                                        .AllowAnyMethod()
+                                        .AllowAnyOrigin()
+                                        .AllowCredentials();
                 });
+                c.AddPolicy("AnotherPolicy1",
+               builder =>
+               {
+                   builder.WithOrigins("http://localhost:60354")
+                                       .AllowAnyHeader()
+                                       .AllowAnyMethod()
+                                       .AllowAnyOrigin()
+                                       .AllowCredentials();
+               });
             });
 
             services.AddSwaggerGen(c =>
