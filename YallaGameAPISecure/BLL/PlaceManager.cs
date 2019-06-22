@@ -55,6 +55,8 @@ namespace YallaGameAPISecure.BLL
             return places;
         }
 
+
+        //update part of place by place id 
         public bool Updatev1(Place item)
         {
             Place oldplace = context.Set<Place>().Find(item.PlaceId);

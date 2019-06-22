@@ -19,7 +19,7 @@ namespace YallaGameAPISecure.BLL
         }
 
 
-
+        //send place id and return reviews of this place 
         public List<PlaceReviewDto> GetReviewsByPlaceId(int id)
         {
             List<ReviewPlace> res = getAll().Where(i => i.PlaceId == id).ToList();
@@ -32,11 +32,17 @@ namespace YallaGameAPISecure.BLL
 
             foreach (ReviewPlace i in res)
             {
+                
+                User user = context.Set<User>().Find(i.UserId);
+               
                 x = new PlaceReviewDto();
                 x.PlaceId = i.PlaceId;
                 x.UserId = i.UserId;
                 x.Content = i.Content;
                 x.Rate = i.Rate;
+                x.Image = user.Image;
+                x.UserName = user.Name;
+                
 
                 xlist.Add(x);
             }

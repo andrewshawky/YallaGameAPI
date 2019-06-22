@@ -50,6 +50,7 @@ namespace YallaGameAPISecure.Controllers
         }
 
         // PUT: api/Users/5
+        //update part of place by place id 
         [HttpPut("{id}")]
         public IActionResult PutPlace([FromRoute] int id, [FromBody] Place place)
         {

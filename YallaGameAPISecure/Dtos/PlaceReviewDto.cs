@@ -11,5 +11,7 @@ namespace YallaGameAPISecure.Dtos
         public int? UserId { get; set; }
         public string Content { get; set; }
         public int Rate { get; set; }
+        public string Image { get; set; }
+        public string UserName { get; set; }
     }
 }
