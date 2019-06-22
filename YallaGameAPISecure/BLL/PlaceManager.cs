@@ -22,7 +22,7 @@ namespace YallaGameAPISecure.BLL
         {
 
             Place pl = getById(id);
-            PlaceexDto x=new PlaceexDto() ;
+            PlaceexDto x =new PlaceexDto() ;
             x.PlaceId = pl.PlaceId;
             x.Name = pl.Name;
             x.Rate = pl.Rate;
@@ -30,6 +30,13 @@ namespace YallaGameAPISecure.BLL
             x.CloseHour = pl.CloseHour;
             x.Image = pl.Image;
             x.Phone = pl.Phone;
+            x.City = pl.City;
+            x.Country = pl.Country;
+            x.Description = pl.Description;
+            x.Latitude = pl.Latitude;
+            x.Longitude = pl.Longitude;
+            x.Days = pl.Days;
+            x.Email = pl.Email;
             return x ;
         }
 

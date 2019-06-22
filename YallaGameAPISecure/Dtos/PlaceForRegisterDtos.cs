@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace YallaGameAPISecure.Dtos
 {
-    /// <summary>
-    /// attributes we recives in register message only
-    /// </summary>
-    public class UserForRegisterDtos
+    public class PlaceForRegisterDtos
     {
-         [Required]
+
+        [Required]
         public string UserName { get; set; }
         [Required]
-        [StringLength(30,MinimumLength =6,ErrorMessage ="password length between 6 and 30")]
+        [StringLength(30, MinimumLength = 6, ErrorMessage = "password length between 6 and 30")]
         public string Password { get; set; }
 
         [DataType(DataType.EmailAddress)]
@@ -26,11 +24,17 @@ namespace YallaGameAPISecure.Dtos
         public string Country { get; set; }
 
         public string City { get; set; }
+        public string Description { get; set; }
+        public string Days { get; set; }
+        public string OpenHour { get; set; }
+        public string CloseHour { get; set; }
+
+
 
         [StringLength(11, MinimumLength = 11, ErrorMessage = "Phone must be 11 digit")]
         public string Phone { get; set; }
 
-        
-
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
     }
 }

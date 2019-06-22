@@ -38,7 +38,7 @@ namespace YallaGameAPISecure.Controllers
         /// <param name="password"></param>
         /// <returns></returns>
         [HttpPost("Register")]
-        public async Task<IActionResult> Register([FromBody]UserForRegisterDtos dtos)
+        public async Task<IActionResult> Register([FromBody]PlaceForRegisterDtos dtos)
         {
             if (!ModelState.IsValid)
             {
@@ -66,7 +66,13 @@ namespace YallaGameAPISecure.Controllers
                 City = dtos.City,
                 Phone = dtos.Phone,
                 Latitude=dtos.Latitude,
-                Longitude=dtos.Longitude
+                Longitude=dtos.Longitude,
+                Description=dtos.Description,
+                Days=dtos.Days,
+                Image=dtos.Image,
+                CloseHour=dtos.CloseHour,
+                OpenHour=dtos.OpenHour,
+
                 
             };
             var createduser = await _repo.Register(usertocreate, dtos.Password);
@@ -74,9 +80,9 @@ namespace YallaGameAPISecure.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody]UserForLoginDto userForLoginDto)
+        public async Task<IActionResult> Login([FromBody]PlaceForRegisterDtos userForLoginDto)
         {
-            var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
+            var userFromRepo = await _repo.Login(userForLoginDto.UserName.ToLower(), userForLoginDto.Password);
 
             if (userFromRepo == null)
                 return Unauthorized();

@@ -234,7 +234,8 @@ namespace YallaGameAPISecure.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-               
+                entity.Property(e => e.Description)
+                     .IsUnicode(false);
 
                 entity.Property(e => e.Country)
                     .HasMaxLength(100)
