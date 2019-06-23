@@ -32,15 +32,18 @@ namespace YallaGameAPISecure.Controllers
         // GET: api/Users/5
         //send id of place and return specific data of this place  
 
-        [HttpPost("[action]")]
-        public async Task<IActionResult> UploadImage(IFormFile file)
+        [HttpPost("[action]/{id}")]
+        public async Task<IActionResult> UploadImage(IFormFile file,int id)
         {
             try
             {
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images",file.Name);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", file.FileName);
+                
                 var stream = new FileStream(path, FileMode.Create);
-                file.CopyToAsync(stream);
-                return Ok(new { mpath = path, name = file.Name });
+                await file.CopyToAsync(stream);
+                Place pl = unit.PlaceManager.getById(id);
+                unit.PlaceManager.UpdatImage(pl,file.FileName);
+                return Ok(new { path,length=file.Length, name = file.FileName });
             }
             catch 
             {

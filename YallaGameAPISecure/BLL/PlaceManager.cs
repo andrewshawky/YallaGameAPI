@@ -72,5 +72,13 @@ namespace YallaGameAPISecure.BLL
 
         }
 
+        public bool UpdatImage(Place item,string name)
+        {
+            Place oldplace = context.Set<Place>().Find(item.PlaceId);
+            oldplace.Image = name;
+            return context.SaveChanges() > 0 ? true : false;
+
+        }
+
     }
 }
