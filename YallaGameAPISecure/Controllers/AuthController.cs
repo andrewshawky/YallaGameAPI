@@ -63,7 +63,8 @@ namespace YallaGameAPISecure.Controllers
                 Email=dtos.Email,
                 Country=dtos.Country,
                 City=dtos.City,
-                Phone=dtos.Phone
+                Phone=dtos.Phone,
+                Online=true
 
             };
              var createduser = await _repo.Register(usertocreate, dtos.Password);
@@ -104,5 +105,12 @@ namespace YallaGameAPISecure.Controllers
             });
         }
 
+
+
+        //[HttpPost("Logout")]
+        //public IActionResult Logout([FromRoute] int id)
+        //{
+            
+        //}
     }
 }

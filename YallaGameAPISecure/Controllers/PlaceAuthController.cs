@@ -112,5 +112,7 @@ namespace YallaGameAPISecure.Controllers
                 token = tokenHandler.WriteToken(token)
             });
         }
+
+        
     }
 }
