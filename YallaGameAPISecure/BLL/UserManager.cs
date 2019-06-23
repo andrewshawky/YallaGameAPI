@@ -35,11 +35,18 @@ namespace YallaGameAPISecure.BLL
 
         public List<User> getAllOnlineUsers(int id)
         {
-            List<User> users = getAll().Where(i=>i.Online==true&&i.UserId!=id).ToList();
+            User user = getAll().FirstOrDefault(i => i.UserId == id);
+            List<User> users = getAll().Where(i=>i.Online==true&&i.UserId!=id&&i.CurrentCity==user.CurrentCity).ToList();
             
             return users;
         }
+        public List<User> getAllUsersInSameAreaFunc(int id)
+        {
+            User user = getAll().FirstOrDefault(i => i.UserId == id);
+            List<User> users = getAll().Where(i =>  i.UserId != id && i.CurrentCity == user.CurrentCity).ToList();
 
+            return users;
+        }
 
 
     }

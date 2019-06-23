@@ -45,6 +45,25 @@ namespace YallaGameAPISecure.Controllers
             return Ok(user);
         }
 
+
+        // GET: api/Users/5
+        [HttpGet("[action]/{id}")]
+        public IActionResult getAllUsersInSameArea([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = unit.UserManager.getAllUsersInSameAreaFunc(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
+        }
         // PUT: api/Users/5
         [HttpPut("{id}")]
         public IActionResult PutUser([FromRoute] int id, [FromBody] User user)
