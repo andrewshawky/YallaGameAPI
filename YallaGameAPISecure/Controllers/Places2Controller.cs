@@ -138,14 +138,14 @@ namespace YallaGameAPISecure.Controllers
 
         // GET: api/Users/cairo
         [HttpGet("[action]/{id}")]
-        public IActionResult GetPlaces([FromRoute] int id)
+        public IActionResult GetPlacesByUser([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            List<Place> places = unit.PlaceManager.GetByCity(id);
+            List<Place> places = unit.PlaceManager.GetPlacesByUserId(id);
 
             if (places == null)
             {

@@ -43,7 +43,7 @@ namespace YallaGameAPISecure.BLL
         }
 
 
-        public List<Place> GetByCity(int id)
+        public List<Place> GetPlacesByUserId(int id)
         {
 
            // yallagameContext context = new yallagameContext();
