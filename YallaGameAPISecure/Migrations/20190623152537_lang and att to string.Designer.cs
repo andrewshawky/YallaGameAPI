@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YallaGameAPISecure.Models;
 
 namespace YallaGameAPISecure.Migrations
 {
     [DbContext(typeof(yallagameContext))]
-    partial class yallagameContextModelSnapshot : ModelSnapshot
+    [Migration("20190623152537_lang and att to string")]
+    partial class langandatttostring
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

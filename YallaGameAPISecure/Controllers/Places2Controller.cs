@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using YallaGameAPISecure.Models;
 using YallaGameAPISecure.unitofwork;
+using System.IO;
 
 namespace YallaGameAPISecure.Controllers
 {
@@ -30,6 +31,22 @@ namespace YallaGameAPISecure.Controllers
 
         // GET: api/Users/5
         //send id of place and return specific data of this place  
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> UploadImage(IFormFile file)
+        {
+            try
+            {
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images",file.Name);
+                var stream = new FileStream(path, FileMode.Create);
+                file.CopyToAsync(stream);
+                return Ok(new { mpath = path, name = file.Name });
+            }
+            catch 
+            {
+                return BadRequest();
+            }
+        }
 
         [HttpGet("{id}")]
         public IActionResult GetPlace([FromRoute] int id)

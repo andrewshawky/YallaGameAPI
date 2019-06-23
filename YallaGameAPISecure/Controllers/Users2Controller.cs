@@ -26,6 +26,8 @@ namespace YallaGameAPISecure.Controllers
             return unit.UserManager.getAll();
         }
 
+
+
         // GET: api/Users/5
         [HttpGet("{id}")]
         public IActionResult GetUser([FromRoute] int id)
@@ -47,6 +49,7 @@ namespace YallaGameAPISecure.Controllers
 
 
         // GET: api/Users/5
+        //send id of user and return users in the same place 
         [HttpGet("[action]/{id}")]
         public IActionResult getAllUsersInSameArea([FromRoute] int id)
         {

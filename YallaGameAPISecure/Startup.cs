@@ -107,7 +107,7 @@ namespace YallaGameAPISecure
             }
             app.UseAuthentication();
             app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
-
+            app.UseStaticFiles();
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c => {
