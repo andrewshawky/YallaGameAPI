@@ -15,9 +15,9 @@ namespace YallaGameAPISecure.Data
         {
             _context = context;
         }
-        public async Task<User> Login(string email, string password)
+        public async Task<User> Login(string username, string password)
         {
-            var User = await _context.User.FirstOrDefaultAsync(x => x.Email == email);
+            var User = await _context.User.FirstOrDefaultAsync(x => x.Name == username);
             if (User == null)
             {
                 return null;
@@ -82,14 +82,5 @@ namespace YallaGameAPISecure.Data
             }
             return false;
         }
-
-        //public async Task<bool> EmailExists(string email)
-        //{
-        //    if (await _context.User.AnyAsync(x => x.Email == email))
-        //    {
-        //        return true;
-        //    }
-        //    return false;
-        //}
     }
 }
