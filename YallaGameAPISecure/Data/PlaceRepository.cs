@@ -15,9 +15,9 @@ namespace YallaGameAPISecure.Data
         {
             _context = context;
         }
-        public async Task<Place> Login(string placename, string password)
+        public async Task<Place> Login(string email, string password)
         {
-            var Place = await _context.Place.FirstOrDefaultAsync(x => x.Name == placename);
+            var Place = await _context.Place.FirstOrDefaultAsync(x => x.Email == email);
             if (Place == null)
             {
                 return null;

@@ -82,7 +82,7 @@ namespace YallaGameAPISecure.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]PlaceForRegisterDtos userForLoginDto)
         {
-            var userFromRepo = await _repo.Login(userForLoginDto.UserName.ToLower(), userForLoginDto.Password);
+            var userFromRepo = await _repo.Login(userForLoginDto.Email.ToLower(), userForLoginDto.Password);
 
             if (userFromRepo == null)
                 return Unauthorized();

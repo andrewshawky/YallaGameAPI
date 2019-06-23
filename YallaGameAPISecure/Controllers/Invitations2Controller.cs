@@ -82,18 +82,18 @@ namespace YallaGameAPISecure.Controllers
             return NoContent();
         }
 
-        // POST: api/invitations
-        [HttpPost]
-        public IActionResult PostPlace([FromBody] Invitation invitation)
-        {
+        //// POST: api/invitations
+        //[HttpPost("[action]/{id}")]
+        //public IActionResult PostInvitation([FromBody] List<int> userids)
+        //{
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            Invitation i = unit.InvitationManager.Insert(invitation);
-            return Created("GetInvitation",  i);
-        }
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    Invitation i = unit.InvitationManager.Insert(invitation);
+        //    return Created("GetInvitation",  i);
+        //}
 
         // DELETE: api/invitations/5
         [HttpDelete("{id}")]
